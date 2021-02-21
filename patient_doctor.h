@@ -43,28 +43,6 @@ string print_date(const Date& d) {
 	return date.str();
 };
 
-
-void add_patient_csv(Patient& p) {
-
-    // file pointer 
-	fstream fout;
-
-    // opens an existing csv file or creates a new file. 
-    fout.open("patients.csv", ios::out | ios::app);
-
-	string birth = print_date(p.birth);
-	string admit = print_date(p.admit);
-	
-// Insert the data to file 
-fout << p.first_name << ", " 
-     << p.last_name << ", "
-     << p.address << ", "
-     << p.age << ", "
-     << birth<< ", "
-     << admit << ", "
-	 << p.diag << "\n";
-};
-
 //To get the Patient's Age
 int patients_Age(int current_month, int current_year, int birth_month, int birth_year) {
 
@@ -76,6 +54,29 @@ int patients_Age(int current_month, int current_year, int birth_month, int birth
 
     return calculated_year;
 };
+
+void add_patient_csv(Patient& p) {
+
+    // file pointer 
+	fstream fout;
+
+    // opens an existing csv file or creates a new file. 
+    fout.open("patients.csv", ios::out | ios::app);
+
+	string birth = print_date(p.birth);
+	string admit = print_date(p.admit);
+    int age = patients_Age(p.admit.month, p.admit.year, p.birth.month, p.birth.year);
+	
+// Insert the data to file 
+fout << p.first_name << ", " 
+     << p.last_name << ", "
+     << p.address << ", "
+     << age << ", "
+     << birth<< ", "
+     << admit << ", "
+	 << p.diag << "\n";
+};
+
 
 //displaying goodbye
 void goodbye() {
