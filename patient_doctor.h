@@ -59,6 +59,7 @@ void add_patient_csv(Patient& p) {
 fout << p.first_name << ", " 
      << p.last_name << ", "
      << p.address << ", "
+     << p.age << ", "
      << birth<< ", "
      << admit << ", "
 	 << p.diag << "\n";
